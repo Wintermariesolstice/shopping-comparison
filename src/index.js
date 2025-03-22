@@ -1,14 +1,17 @@
-function displayGrocery(response) {
+function displayRestaurant(response) {
   console.log("Full API Response:", response.data);
 
-  let groceryContent = response.data.answer;
-  console.log("Grocery Content:", groceryContent);
+  let restaurantContent = response.data.answer;
+  console.log("Restaurant Content:", restaurantContent);
 
-  let groceryElement = document.querySelector("#book");
-  groceryElement.innerHTML = "";
+  let restaurantElement = document.querySelector("#restaurant");
+  restaurantElement.innerHTML = "";
 
-  groceryContent = groceryContent.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
-  groceryContent = groceryContent.replace(
+  restaurantContent = restaurantContent.replace(
+    /\*\*(.*?)\*\*/g,
+    "<strong>$1</strong>"
+  );
+  restaurantContent = restaurantContent.replace(
     /!\[(.*?)\]\((.*?)\)/g,
     (match, altText, url) => {
       console.log("Image URL:", url);
@@ -19,33 +22,35 @@ function displayGrocery(response) {
     }
   );
 
-  groceryContent = groceryContent.replace(/\n/g, "</br>");
-  groceryElement.innerHTML = groceryContent;
+  restaurantContent = restaurantContent.replace(/\n/g, "</br>");
+  restaurantElement.innerHTML = restaurantContent;
 }
 
-function generateGrocery(event) {
+function generateRestaurant(event) {
   event.preventDefault();
 
   let instructionsInput = document.querySelector("#user-instructions");
   let apiKey = "2a0btf0ao0fa13fec249490d3e8c2c77";
   let context =
-    "You are a grocery shopper in London.Your mission is to give 3 price comparison from Sainsbury, Tesco and Waitrose. Each grocery item must include a picture and a description.(Example quatity) Make sure to only use valid url.Sign off with 'SheCodes AI.' in <strong></strong>.";
-  let prompt = `User instructions: Generate 3 price comparison about ${instructionsInput.value}`;
+    "You enjoy eating out in London. Your mission is to give 3 best restaurants from the Michelin guide. Each restaurant must include a description and address with phone number or website. Sign off with 'SheCodes AI.' in <strong></strong>.";
+  let prompt = `User instructions: Generate 3 restaurant based on the type of cuisine ${instructionsInput.value}`;
   let apiUrl = `https://api.shecodes.io/ai/v1/generate?prompt=${prompt}&context=${context}&key=${apiKey}`;
 
-  let groceryElement = document.querySelector("#grocery");
-  groceryElement.classList.remove("hidden");
-  groceryElement.innerHTML = `<div class="generating">⏳ Generating price comparison ${instructionsInput.value}</div>`;
+  let restaurantElement = document.querySelector("#restaurant");
+  restaurantElement.classList.remove("hidden");
+  restaurantElement.innerHTML = `<div class="generating">⏳ Generating restaurant information ${instructionsInput.value}</div>`;
 
   axios
     .get(apiUrl)
-    .then(displayGrocery)
+    .then(displayRestaurant)
     .catch((error) => {
-      console.error("Error fetching price comparisons:", error);
-      groceryElement.innerHTML =
-        "Failed to fetch price comparison. Please try again.";
+      console.error("Error fetching restaurant information:", error);
+      restaurantElement.innerHTML =
+        "Failed to fetch restaurant information. Please try again.";
     });
 }
 
-let groceryFormElement = document.querySelector("#grocery-generator-form");
-groceryFormElement.addEventListener("submit", generateGrocery);
+let restaurantFormElement = document.querySelector(
+  "#restaurant-generator-form"
+);
+restaurantFormElement.addEventListener("submit", generateRestaurant);

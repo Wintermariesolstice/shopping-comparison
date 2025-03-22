@@ -7,20 +7,20 @@
     <script src="https://unpkg.com/typewriter-effect@latest/dist/core.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@1.6.7/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
-    <title>London Grocery Price Comparison</title>
+    <title>London Best Restaurant Guide</title>
   </head>
   <body>
     <div class="container">
       <header>
-        <h1>London Grocery Price Comparison</h1>
+        <h1>London Best Restaurant Guide</h1>
       </header>
 
       <main>
         <div class="form-container">
-          <form id="grocery-generator-form">
+          <form id="restaurant-generator-form">
             <input
               type="text"
-              placeholder="Enter type of grocery"
+              placeholder="Enter type of cuisine"
               autofocus
               required
               autocomplete="off"
@@ -30,9 +30,9 @@
 
             <input type="submit" class="submit-button" />
           </form>
-          <div class="hint">i.e: milk, bread, eggs</div>
+          <div class="hint">i.e: chinese, indian, polish</div>
         </div>
-        <div class="grocery hidden" id="grocery"></div>
+        <div class="restaurant hidden" id="restaurant"></div>
       </main>
 
       <footer>
@@ -42,13 +42,14 @@
         >
         and is
         <a
-          href="https://github.com/Wintermariesolstice/book-recommendation-generator"
+          href="https://github.com/Wintermariesolstice/shopping-comparison"
           target="_blank"
           >open-sourced on GitHub</a
         >
         and is hosted by
-        <a href="https://tubular-daifuku-7769b6.netlify.app" target="_blank"
-          >Netlify.</a
+        <a href="https://cosmic-sorbet-1bb276.netlify.app" target="_blank"
+          >Netlify. <br></br>
+          </a
         >
       </footer>
     </div>
